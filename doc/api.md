@@ -1,4 +1,5 @@
-Apitome Documentation
+Soccer League API
 =====================
 
-This file was automatically generated, and can be found at `doc/api.md`.
+This is the documentation for the Soccer League REST API developed by
+Team 1 for CSUMB CST499.

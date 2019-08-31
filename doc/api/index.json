@@ -1,5 +1,24 @@
 {
   "resources": [
-
+    {
+      "name": "Authentication",
+      "explanation": "Authenticate using a users credentials. Returns a JWT that can be used to interact with the API.",
+      "examples": [
+        {
+          "description": "Successful Login",
+          "link": "authentication/successful_login.json",
+          "groups": "all",
+          "route": "/authenticate",
+          "method": "post"
+        },
+        {
+          "description": "Invalid Login Credentials",
+          "link": "authentication/invalid_login_credentials.json",
+          "groups": "all",
+          "route": "/authenticate",
+          "method": "post"
+        }
+      ]
+    }
   ]
 }
