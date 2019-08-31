@@ -51,3 +51,5 @@ gem "rspec_api_documentation", "~> 6.1"
 gem "apitome", "~> 0.3.0"
 
 gem "mysql2", "~> 0.5.2"
+
+gem "simple_command", "~> 0.0.9"
