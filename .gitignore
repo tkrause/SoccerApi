@@ -30,3 +30,7 @@
 
 .idea
 *.iml
+
+### Project
+
+/doc/api/*
