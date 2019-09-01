@@ -14,14 +14,22 @@ build:
 test:
   stage: test
   script:
-    - rspec
+    - bundle exec rspec
 
 docs:
   stage: docs
   script:
-    - rspec doc:generate
+    - bundle exec rspec doc:generate
+
+release:
+  stage: release
+  script:
+    - git config --global user.name "${GITHUB_USER_NAME}"
+    - git config --global user.email "${GITHUB_USER_EMAIL}"
+    - git add --all
+    - git commit -m "GitLab Runner Push"
+    - git push http://${GITHUB_USERNAME}:${PERSONAL_ACCESS_TOKEN}@github.com/tkrause/SoccerApi.git HEAD:production
 
 cache:
   paths:
     - vendor/ruby
-
