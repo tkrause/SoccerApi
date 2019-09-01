@@ -32,5 +32,5 @@
 *.iml
 
 ### Project
-
+/doc/api/*
 /vendor/ruby
