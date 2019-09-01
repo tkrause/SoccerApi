@@ -19,7 +19,7 @@ cache:
 test:
   stage: test
   script:
-    - rake docs:generate
+    - bundle exec rake docs:generate
 
 deploy:
   stage: deploy
