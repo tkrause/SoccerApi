@@ -9,7 +9,7 @@ stages:
 before_script:
   - ruby -v
   - which ruby
-  - gem install bundler --no-ri --no-rdoc
+  - gem install bundler
   - bundle install --jobs $(nproc) --path vendor
 
 cache:
