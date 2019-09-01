@@ -6,6 +6,11 @@ stages:
   - docs
   - release
 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - vendor/ruby
+
 build:
   stage: build
   script:
@@ -30,8 +35,3 @@ release:
     - git add --all
     - git commit -m "GitLab Runner Push"
     - git push http://${GITHUB_USERNAME}:${PERSONAL_ACCESS_TOKEN}@github.com/tkrause/SoccerApi.git HEAD:production
-
-cache:
-  paths:
-    - vendor/ruby
-
