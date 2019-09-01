@@ -6,16 +6,16 @@ stages:
   - docs
   - release
 
+before_script:
+  - ruby -v
+  - which ruby
+  - gem install bundler --no-ri --no-rdoc
+  - bundle install --jobs $(nproc) --path vendor
+
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - vendor/ruby
-
-build:
-  stage: build
-  script:
-    - ruby -v
-    - bundle install -j $(nproc) --path vendor
 
 test:
   stage: test
