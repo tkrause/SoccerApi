@@ -4,6 +4,7 @@ stages:
   - build
   - test
   - docs
+  - release
 
 build:
   stage: build
