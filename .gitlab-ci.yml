@@ -1,15 +1,12 @@
 image: "ruby:2.6"
 
-services:
-  - mysql:latest
+before_script:
+  - ruby -v  # Print out ruby version for debugging
+  - bundle install -j $(nproc) --path vendor  # Install dependencies into ./vendor/ruby
 
 cache:
   paths:
     - vendor/ruby
-
-before_script:
-  - ruby -v  # Print out ruby version for debugging
-  - bundle install -j $(nproc) --path vendor  # Install dependencies into ./vendor/ruby
 
 test:
   script:
