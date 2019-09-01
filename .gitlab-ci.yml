@@ -1,17 +1,27 @@
 image: "ruby:2.6"
 
-before_script:
-  - ruby -v  # Print out ruby version for debugging
-  - bundle install -j $(nproc) --path vendor  # Install dependencies into ./vendor/ruby
+stages:
+  - build
+  - test
+  - docs
+
+build:
+  stage: build
+  script:
+    - ruby -v
+    - bundle install -j $(nproc) --path vendor
+
+test:
+  stage: test
+  script:
+    - rspec
+
+docs:
+  stage: docs
+  script:
+    - rspec doc:generate
 
 cache:
   paths:
     - vendor/ruby
 
-test:
-  script:
-    - rspec
-
-docs:
-  script:
-    - rspec doc:generate
