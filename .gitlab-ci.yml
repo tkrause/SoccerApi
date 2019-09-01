@@ -17,10 +17,15 @@ cache:
     - doc/api
 
 test:
+  stage: test
+  script:
+    - rake docs:generate
+
+deploy:
   stage: deploy
   script:
-    - rspec
-    - rspec doc:generate
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
 #
 #release:
 #  stage: release
