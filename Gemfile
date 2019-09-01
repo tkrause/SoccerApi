@@ -42,14 +42,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
 gem "rspec_api_documentation", "~> 6.1"
-
 gem "apitome", "~> 0.3.0"
-
-gem "mysql2", "~> 0.5.2"
-
 gem "simple_command", "~> 0.0.9"
+gem "mysql2", "~> 0.5.2"

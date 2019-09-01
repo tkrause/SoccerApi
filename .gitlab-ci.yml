@@ -1,10 +1,8 @@
 image: "ruby:2.6"
 
 stages:
-  - build
   - test
-  - docs
-  - release
+  - deploy
 
 before_script:
   - ruby -v
@@ -16,22 +14,19 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - vendor/ruby
+    - doc/api
 
 test:
-  stage: test
+  stage: deploy
   script:
-    - bundle exec rspec
-
-docs:
-  stage: docs
-  script:
-    - bundle exec rspec doc:generate
-
-release:
-  stage: release
-  script:
-    - git config --global user.name "${GITHUB_USER_NAME}"
-    - git config --global user.email "${GITHUB_USER_EMAIL}"
-    - git add --all
-    - git commit -m "GitLab Runner Push"
-    - git push http://${GITHUB_USERNAME}:${PERSONAL_ACCESS_TOKEN}@github.com/tkrause/SoccerApi.git HEAD:production
+    - rspec
+    - rspec doc:generate
+#
+#release:
+#  stage: release
+#  script:
+#    - git config --global user.name "${GITHUB_USER_NAME}"
+#    - git config --global user.email "${GITHUB_USER_EMAIL}"
+#    - git add --all
+#    - git commit -m "GitLab Runner Push"
+#    - git push http://${GITHUB_USERNAME}:${PERSONAL_ACCESS_TOKEN}@github.com/tkrause/SoccerApi.git HEAD:production
