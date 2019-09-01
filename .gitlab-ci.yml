@@ -26,7 +26,7 @@ deploy:
   script:
     - ls -l doc/api/
     - gem install dpl
-    - dpl --no-cleanup --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
+    - dpl --no-cleanup --skip-cleanup --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
 
 #release:
 #  stage: release
