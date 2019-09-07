@@ -4,7 +4,16 @@ stages:
   - test
   - deploy
 
+variables:
+  os: linux
+  arch: amd64
+  version: v3.3.2
+
 before_script:
+  - wget https://github.com/bukalapak/snowboard/releases/download/${version}/snowboard-${version}.${os}-${arch}.tar.gz
+  - tar -zxvf snowboard-${version}.${os}-${arch}.tar.gz
+  - rm snowboard-${version}.${os}-${arch}.tar.gz
+  - ./snowboard -v
   - ruby -v
   - which ruby
   - gem install bundler
@@ -19,11 +28,13 @@ cache:
 test:
   stage: test
   script:
-    - bundle exec rake docs:generate
+    - bundle exec rake build:docs
+    - ./snowboard html -o public/index.html doc/index.apib
 
 deploy:
   stage: deploy
   script:
+    - rm ./snowboard
     - ls -l doc/api/
     - gem install dpl
     - dpl --no-cleanup --skip-cleanup --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY

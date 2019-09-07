@@ -8,11 +8,8 @@ class AuthenticationController < ApplicationController
     if command.success?
       render json: command.result
     else
-      render json: {error: command.errors}, status: :unauthorized
+      render json: { error: command.errors }, status: :unauthorized
     end
   end
 
-  def user
-    render json: @current_user
-  end
 end

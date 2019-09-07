@@ -9,6 +9,16 @@ RspecApiDocumentation.configure do |config|
   # An array of output format(s).
   # Possible values are :json, :html, :combined_text, :combined_json,
   #   :json_iodocs, :textile, :markdown, :append_json
-  config.format = [:json]
+  config.format = [:json, :api_blueprint]
   config.keep_source_order = true
+  config.api_name = nil
+end
+
+def generate_api_key(email = 'user@example.com', password = '0987654321')
+  command = AuthenticateUser.call(email, password)
+  command.result[:token]
+end
+
+def json
+  JSON.parse(response_body)
 end

@@ -7,30 +7,31 @@ resource 'Authentication' do
 
   let(:user) { User.create(name: 'Test User', email: 'user@example.com', password: '0987654321') }
 
-  post '/authenticate' do
-    let(:email) { user.email }
-    let(:password) { '0987654321' }
+  route '/authenticate', 'Authenicate' do
+    post 'Login as user' do
 
-    parameter :email, 'The email address of the user', required: true
-    parameter :password, 'User password to authenticate with', required: true
+      let(:email) { user.email }
+      let(:password) { '0987654321' }
 
-    # send it as a json post in the body
-    let(:raw_post) { params.to_json }
+      attribute :email, 'The email address of the user', required: true
+      attribute :password, 'User password to authenticate with', required: true
 
-    context '200' do
-      example_request 'Successful Login' do
-        json = JSON.parse(response_body)
+      # send it as a json post in the body
+      let(:raw_post) { params.to_json }
 
-        expect(status).to eq(200)
-        expect(json).to have_key('token')
+      context '200' do
+        example_request 'Successful Login' do
+          expect(status).to eq(200)
+          expect(json).to have_key('token')
+        end
       end
-    end
 
-    context '401' do
-      let(:email) { 'nonexistentuser@nobody.com' }
+      context '401' do
+        let(:email) { 'nonexistentuser@nobody.com' }
 
-      example_request 'Invalid Login Credentials' do
-        expect(status).to eq(401)
+        example_request 'Invalid Login Credentials' do
+          expect(status).to eq(401)
+        end
       end
     end
 

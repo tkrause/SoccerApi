@@ -34,3 +34,4 @@
 ### Project
 /doc/api/*
 /vendor/ruby
+/public/index.html

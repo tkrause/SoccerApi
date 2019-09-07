@@ -6,6 +6,18 @@ class ApplicationController < ActionController::API
 
   def authenticate_request
     @current_user = AuthorizeApiRequest.call(request.headers).result
-    render json: {error: 'unauthorized'}, status: 401 unless @current_user
+    render json: { error: 'unauthorized' }, status: 401 unless @current_user
+  end
+
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    render json: { error: e.message }, status: 404
+  end
+
+  rescue_from ActiveRecord::RecordInvalid do |e|
+    render json: { error: e.message }, status: 422
+  end
+
+  rescue_from ActiveRecord::RecordNotUnique do |_|
+    render json: { error: 'non unique entity' }, status: 409
   end
 end

@@ -93,4 +93,7 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+  config.before(:each) do
+    User.create(name: 'Test User', email: 'user@example.com', password: '0987654321')
+  end
 end
