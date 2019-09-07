@@ -24,6 +24,7 @@ cache:
   paths:
     - vendor/ruby
     - doc/api
+    - public/
 
 test:
   stage: test
