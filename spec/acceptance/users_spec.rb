@@ -30,17 +30,18 @@ resource 'Users' do
   end
 
   route '/users', 'Users Collection' do
-    post '/users' do
+    authentication :basic, nil
+    post 'Register user account' do
       # create user
       let(:name) { 'New User' }
       let(:email) { 'new-user@example.com' }
       let(:password) { '0987654321' }
       let(:password_confirmation) { password }
 
-      parameter :name, 'The name of the user', required: true
-      parameter :email, 'The email address of the user', required: true
-      parameter :password, 'Password to user for the new user', required: true
-      parameter :password_confirmation, 'Confirmation password', required: true
+      parameter :name, 'The name of the user', type: :string, required: true
+      parameter :email, 'The email address of the user', type: :email, required: true
+      parameter :password, 'Password to user for the new user', type: :string, required: true
+      parameter :password_confirmation, 'Confirmation password', type: :string, required: true
 
       # send it as a json post in the body
       let(:raw_post) { params.to_json }
@@ -49,6 +50,14 @@ resource 'Users' do
         example_request 'User created' do
           expect(status).to eq(201)
           expect(json['email']).to eq(email)
+        end
+      end
+
+      context 'when email is already taken' do
+        let(:email) { 'user@example.com' }
+        example_request 'Non unique email' do
+          expect(status).to eq(422)
+          expect(response_body).to match(/Email has already been taken/)
         end
       end
     end

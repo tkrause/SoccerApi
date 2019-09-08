@@ -11,7 +11,8 @@ RspecApiDocumentation.configure do |config|
   #   :json_iodocs, :textile, :markdown, :append_json
   config.format = [:json, :api_blueprint]
   config.keep_source_order = true
-  config.api_name = nil
+  config.request_headers_to_include = %w(Content-Type Authorization Accept)
+  config.response_headers_to_include = %w(Content-Type)
 end
 
 def generate_api_key(email = 'user@example.com', password = '0987654321')

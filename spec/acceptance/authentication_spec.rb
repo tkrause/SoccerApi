@@ -7,7 +7,7 @@ resource 'Authentication' do
 
   let(:user) { User.create(name: 'Test User', email: 'user@example.com', password: '0987654321') }
 
-  route '/authenticate', 'Authenicate' do
+  route '/login', 'Authenicate' do
     post 'Login as user' do
 
       let(:email) { user.email }

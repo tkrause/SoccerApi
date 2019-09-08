@@ -1,8 +1,7 @@
 class AuthenticationController < ApplicationController
   skip_before_action :authenticate_request
-  before_action :authenticate_request, only: [:user]
 
-  def authenticate
+  def login
     command = AuthenticateUser.call(params[:email], params[:password])
 
     if command.success?

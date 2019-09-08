@@ -1,6 +1,34 @@
 FORMAT: 1A
+HOST: http://cst499-soccer-app.herokuapp.com
+
 # Soccer League API
 
-test test test
+This is the REST API documentation for the CSUMB CST 499 TEAM 1 - Soccer League Application.
+
+## Authentication
+
+Most routes expect an authorized user (authentication token). The token is passed in as a `header` in the Authorization field.
+
+```
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1Njc3MzM2Mjl9.mhE9tkbZDRnx398Pv7PXvzdEfQWu-rgzd0bUodQ_W_Y
+```
+
+In order to obtain an authentication token, see the [/login](http://localhost:8088/#/post~login) endpoint.
+
+## Common Status Codes
+
+Below is a list of common HTTP Status Codes used in this API. All codes in the 200 range
+are success and do not need any interactions. Other codes are errors where the request was not able to be fulfilled.
+
+| Status | Status Message       | Result                 | Solution |
+|:-------|----------------------|------------------------|----------|
+| `200`  | Success              | Success     |          |
+| `201`  | Create               | Resource Created       |          |
+| `400`  | Bad Request          | Invalid Request Data   | Ensure body is JSON encoded and contains proper attributes |
+| `401`  | Unauthorized         | API token is invalid or expired | Re-authenticate |
+| `403`  | Forbidden            | User does not have access to perform this action | Give user access or high level permisisons |
+| `404`  | Not Found            | Route or resource does not exist | Check that the endpoint and method (GET, POST) is correct |
+| `422`  | Unprocessable Entity | One or more fields failed validation | See error messages returned in response |
+| `500`  | Unknown Server Error | Server crashed due to programming error | Check server logs to determine cause |
 
 {{partial "api/index.apib"}}
