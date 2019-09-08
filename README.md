@@ -4,6 +4,14 @@ This project is the backend REST service for the Soccer League App.
 
 # Install
 
+If your using Cloud9
+
+```
+bundle install --without production
+```
+
+If your using IntelliJ with Rails locally
+
 ```
 bundle install
 ```
