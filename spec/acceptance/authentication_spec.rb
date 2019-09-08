@@ -19,14 +19,14 @@ resource 'Authentication' do
       # send it as a json post in the body
       let(:raw_post) { params.to_json }
 
-      context '200' do
+      context 'when credentials are valid' do
         example_request 'Successful Login' do
           expect(status).to eq(200)
           expect(json).to have_key('token')
         end
       end
 
-      context '401' do
+      context 'when credentials are invalid' do
         let(:email) { 'nonexistentuser@nobody.com' }
 
         example_request 'Invalid Login Credentials' do

@@ -47,4 +47,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "rspec_api_documentation", "~> 6.1"
 gem "apitome", "~> 0.3.0"
 gem "simple_command", "~> 0.0.9"
-gem "mysql2", "~> 0.5.2"
+
+group :production do
+  gem "mysql2", "~> 0.5.2"
+end
