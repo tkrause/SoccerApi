@@ -8,8 +8,8 @@
 user = User.create!(name: 'Test User', email: 'user@example.com', password: '0987654321')
 
 # teams seeders
-# ded_team = Team.create!(name: 'Dummy Team No One Is In', team_number: 666)
-# team1 = Team.create!(name: 'Team Win', team_number: 506)
-# team2 = Team.create!(name: 'Team Noobs', team_number: 611)
-# TeamUser.create!(user: user, team: team1, role: 'admin')
-# TeamUser.create!(user: user, team: team2, role: 'player')
+ded_team = Team.create!(name: 'Dummy Team No One Is In', team_number: 666)
+team1 = Team.create!(name: 'Team Win', team_number: 506)
+team2 = Team.create!(name: 'Team Noobs', team_number: 611)
+TeamMember.create!(user: user, team: team1, role: 'admin')
+TeamMember.create!(user: user, team: team2, role: 'player')

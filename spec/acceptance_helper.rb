@@ -11,6 +11,8 @@ RspecApiDocumentation.configure do |config|
   #   :json_iodocs, :textile, :markdown, :append_json
   config.format = [:json, :api_blueprint]
   config.keep_source_order = true
+  config.request_body_formatter = :json
+
   config.request_headers_to_include = %w(Content-Type Authorization Accept)
   config.response_headers_to_include = %w(Content-Type)
 end

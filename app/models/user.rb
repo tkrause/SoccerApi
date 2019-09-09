@@ -2,8 +2,8 @@ class User < ApplicationRecord
   before_save :downcase_email
   has_secure_password
 
-  has_many :team_users
-  has_many :teams, through: :team_users
+  has_many :team_members
+  has_many :teams, through: :team_members
 
   # validations
   validates_presence_of :email
@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   # team methods
   def is_admin?(team)
-    model = self.team_users.where(team_id: team.id).where(role: [
+    model = self.team_members.where(team_id: team.id).where(role: [
         :admin, :coach
     ]).first
 
