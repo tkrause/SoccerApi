@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   # teams
   get 'teams/all', to: 'teams#all'
   resources :teams do
-    resources :users, controller: 'teams_users'
+    resources :users, controller: 'teams_members'
   end
 end
