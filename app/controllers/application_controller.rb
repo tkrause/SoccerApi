@@ -20,4 +20,9 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotUnique do |_|
     render json: { error: 'non unique entity' }, status: 409
   end
+
+  rescue_from Errors::Forbidden do |_|
+    render json: { error: 'you do not have access to modify this resource' }, status: :forbidden
+  end
+
 end

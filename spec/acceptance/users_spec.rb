@@ -38,10 +38,10 @@ resource 'Users' do
       let(:password) { '0987654321' }
       let(:password_confirmation) { password }
 
-      parameter :name, 'The name of the user', type: :string, required: true
-      parameter :email, 'The email address of the user', type: :email, required: true
-      parameter :password, 'Password to user for the new user', type: :string, required: true
-      parameter :password_confirmation, 'Confirmation password', type: :string, required: true
+      attribute :name, 'The name of the user', type: :string, required: true
+      attribute :email, 'The email address of the user', type: :string, required: true
+      attribute :password, 'Password to user for the new user', type: :string, required: true
+      attribute :password_confirmation, 'Confirmation password', type: :string, required: true
 
       # send it as a json post in the body
       let(:raw_post) { params.to_json }

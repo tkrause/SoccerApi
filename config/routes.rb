@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   get 'users/current', to: 'users#current_user'
 
   # teams
-
+  get 'teams/all', to: 'teams#all'
+  resources :teams do
+    resources :users, controller: 'teams_users'
+  end
 end
