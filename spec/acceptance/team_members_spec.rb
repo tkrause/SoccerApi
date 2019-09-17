@@ -76,6 +76,14 @@ resource 'Team Members' do
           expect(json['role']).to eq(role)
         end
       end
+
+      context 'when role is invalid' do
+        let(:role) { 'suckaphatone' }
+        example_request 'modify with invalid role' do
+          expect(status).to eq(422)
+          expect(response_body).to match(/is not a valid role/)
+        end
+      end
     end
 
     delete 'Remove a Team Member' do

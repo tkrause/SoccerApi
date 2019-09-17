@@ -25,4 +25,8 @@ class ApplicationController < ActionController::API
     render json: { error: 'you do not have access to modify this resource' }, status: :forbidden
   end
 
+  rescue_from ArgumentError do |e|
+    render json: { error: e.message }, status: :unprocessable_entity
+  end
+
 end
