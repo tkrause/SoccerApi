@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   # hide sensitive data
   def as_json(options = {})
-    options[:except] ||= [:password_digest]
+    options[:except] ||= [:password_digest, :created_at, :updated_at]
     super(options)
   end
 

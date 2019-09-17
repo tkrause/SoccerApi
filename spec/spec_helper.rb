@@ -95,5 +95,7 @@ RSpec.configure do |config|
 =end
   config.before(:each) do
     User.create(name: 'Test User', email: 'user@example.com', password: '0987654321')
+    User.create(name: 'Test Player', email: 'player@example.com', password: '0987654321')
+    User.create(name: 'Test Player 2', email: 'player2@example.com', password: '0987654321')
   end
 end

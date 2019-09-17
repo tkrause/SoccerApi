@@ -12,10 +12,11 @@
 
 ActiveRecord::Schema.define(version: 2019_09_09_000711) do
 
-  create_table "team_members", id: false, force: :cascade do |t|
+  create_table "team_members", force: :cascade do |t|
     t.integer "user_id"
     t.integer "team_id"
     t.string "role", default: "player"
+    t.string "jersey_number"
     t.index ["user_id", "team_id"], name: "index_team_members_on_user_id_and_team_id", unique: true
   end
 
