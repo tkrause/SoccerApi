@@ -2,13 +2,13 @@ class TeamMembersController < ApplicationController
   # protect update and delete from modifications
   # by non admins
   before_action :set_team
-  before_action :admin_or_fail
+  before_action :admin_or_fail, only: [:create]
 
   # GET /teams/:id/members
   def index
     # get members for this team
     # @teams = @current_user.teams
-    @members = @team.members
+    @members = @team.team_members
 
     render json: @members
   end
