@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_000711) do
+ActiveRecord::Schema.define(version: 2019_09_19_025714) do
+
+  create_table "events", force: :cascade do |t|
+    t.string "event_type", default: "game"
+    t.integer "home_team_id"
+    t.integer "away_team_id"
+    t.integer "home_score", default: 0
+    t.integer "away_score", default: 0
+    t.string "location_name"
+    t.string "location_address"
+    t.string "location_detail"
+    t.datetime "start_at"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+  end
 
   create_table "team_members", force: :cascade do |t|
     t.integer "user_id"
