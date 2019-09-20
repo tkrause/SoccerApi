@@ -44,7 +44,6 @@ resource 'Team Members' do
         example_request 'successfully add team member' do
           expect(status).to eq(201)
           expect(json).to be_an_instance_of(Array)
-          # puts response_body
         end
       end
     end
