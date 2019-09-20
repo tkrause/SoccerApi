@@ -12,4 +12,8 @@ Rails.application.routes.draw do
   resources :teams do
     resources :members, controller: 'team_members'
   end
+
+  # events / games
+  resources :events, only: [:index, :create]
+  get 'teams/:team_id/events', to: 'events#for_team'
 end

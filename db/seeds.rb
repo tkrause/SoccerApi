@@ -43,13 +43,13 @@ Event.create!(
     event_type: 'game', start_at: 12.days.from_now,
     location_name: 'Ocean Side Middle School', location_address: '12345 School, Monterrey',
     location_detail: 'Field 2',
-    home_team_id: team1.id, away_team_id: team2.id
+    home_team_id: team2.id, away_team_id: team1.id
 )
 
 Event.create!(
     event_type: 'game', start_at: 15.days.from_now,
     location_name: 'Ocean Side Middle School', location_address: '12345 School, Monterrey',
     location_detail: 'Field 3',
-    home_team_id: team2.id, away_team_id: team1.id
+    home_team_id: ded_team.id, away_team_id: team1.id
 )
 
