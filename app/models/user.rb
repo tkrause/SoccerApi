@@ -22,6 +22,8 @@ class User < ApplicationRecord
 
   # team methods
   def is_admin?(team)
+    return false if team.nil?
+
     model = self.team_members.where(team_id: team.id).where(role: [
         :admin, :coach
     ]).first

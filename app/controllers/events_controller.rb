@@ -2,40 +2,69 @@ class EventsController < ApplicationController
   # protect update and delete from modifications
   # by non admins
   before_action :set_event_type, only: [:create]
-  before_action :set_teams, only: [:create]
-  before_action :admin_or_fail, only: [:create]
+  before_action :set_event, only: [:show, :update, :destroy]
+  before_action :set_teams_create, only: [:create]
+  before_action :set_teams, only: [:update, :destroy]
+  before_action :admin_or_fail, only: [:create, :update, :destroy]
 
   def index
     # list only events for teams the user is in
     teams = @current_user.teams.pluck(:id)
-    render json: Event.for_teams(teams)
+    render json: Event.for_teams(teams), include: [:away_team, :home_team]
   end
 
   def for_team
-    @team = Team.find params[:team_id]
-    render json: @team.events
+    @team = Team.find(params[:team_id])
+    render json: @team.events.includes(:away_team, :home_team), include: [:away_team, :home_team]
   end
 
   def create
+    @event = Event.create! event_params
+    render json: @event, status: :created
+  end
 
+  def show
+    render json: @event
+  end
+
+  def update
+    if @event.update(event_params)
+      render json: @event
+    else
+      render json: @event.errors, status: :unprocessable_entity
+    end
+    end
+
+  def destroy
+    @event.destroy
   end
 
   private
 
   def admin_or_fail
-    raise Errors::Forbidden unless @current_user.is_admin? @team
+    is_admin = @current_user.is_admin?(@home_team) or @current_user.is_admin?(@away_team)
+    raise Errors::Forbidden unless is_admin
+  end
+
+  def set_teams_create
+    @home_team = Team.find params[:home_team_id]
+    @away_team = Team.find_by(id: params[:away_team_id]) if @is_game
   end
 
   def set_teams
-    @home_team = Team.find params[:home_team_id]
-    @away_team = Team.find_by(id: params[:away_team_id]) if @is_game
+    @home_team = @event.home_team
+    @away_team = @event.away_team
   end
 
   def set_event_type
     @is_game = (params.has_key?(:event_type) and params[:event_type] == 'game')
   end
 
-  def team_params
+  def set_event
+    @event = Event.find params[:id]
+  end
+
+  def event_params
     # always allowed for both types
     allowed = [:event_type, :home_team_id, :location_name, :location_address, :location_detail, :start_at]
     if @is_game

@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   end
 
   # events / games
-  resources :events, only: [:index, :create]
+  resources :events
   get 'teams/:team_id/events', to: 'events#for_team'
 end

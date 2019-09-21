@@ -30,7 +30,8 @@ class TeamsController < ApplicationController
   # POST /teams
   def create
     # anyone can create a team
-    @team = Team.create! team_params
+    @team = Team.create!(team_params)
+    @team.add_creator_as_admin(@current_user)
 
     render json: @team, status: :created
   end
