@@ -11,6 +11,8 @@ class Event < ApplicationRecord
       event: 'event',
   }
 
+  default_scope { order(:start_at) }
+
   scope :game, -> { where(event_type: 'game') }
   scope :not_game, -> { where.not(event_type: 'game') }
   scope :future, -> { where('start_at > ?', DateTime.now) }
