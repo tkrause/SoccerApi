@@ -36,7 +36,16 @@ class EventsController < ApplicationController
     end
 
   def destroy
-    @event.destroy
+    is_future = @event.start_at.future?
+    is_ended = @event.is_ended
+
+    # only allow destroy if the event hasn't occurred
+    if is_future or is_ended
+      @event.destroy
+      head :no_content
+    else
+      render json: { errors: 'cannot delete an event or game that has already occurred' }, status: :bad_request
+    end
   end
 
   private

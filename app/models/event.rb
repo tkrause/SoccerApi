@@ -4,6 +4,8 @@ class Event < ApplicationRecord
   belongs_to :home_team, class_name: 'Team'
   belongs_to :away_team, class_name: 'Team', optional: true
 
+  after_save :compute_team_wins_losses
+
   validate :validate_teams_are_different
 
   enum event_type: {
@@ -21,6 +23,15 @@ class Event < ApplicationRecord
     Event.where(away_team_id: teams).or(
         Event.where(home_team_id: teams)
     )
+  end
+
+  def is_ended?
+    self.ended_at&.present? and self.ended_at&.past?
+  end
+
+  def compute_team_wins_losses
+    self.home_team&.compute_wins_losses
+    self.away_team&.compute_wins_losses
   end
 
   def validate_teams_are_different
