@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # users
   resource :users, only: :create
   get 'users/current', to: 'users#current_user'
+  post 'users/search', to: 'users#search'
 
   # teams
   get 'teams/all', to: 'teams#all'

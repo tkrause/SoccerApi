@@ -37,7 +37,7 @@ class EventsController < ApplicationController
 
   def destroy
     is_future = @event.start_at.future?
-    is_ended = @event.is_ended
+    is_ended = @event.is_ended?
 
     # only allow destroy if the event hasn't occurred
     if is_future or is_ended

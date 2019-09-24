@@ -10,7 +10,21 @@ class UsersController < ApplicationController
     render json: user, status: :created
   end
 
+  def search
+    query = User.select '*'
+
+    search_params.each do |key, value|
+      query = query.where("#{key} LIKE ?", "#{value}%")
+    end
+
+    render json: query
+  end
+
   private
+
+  def search_params
+    params.permit :email
+  end
 
   def user_params
     params.permit :name, :email, :password, :password_confirmation

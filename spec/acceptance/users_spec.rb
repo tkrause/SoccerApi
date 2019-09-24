@@ -33,6 +33,22 @@ resource 'Users' do
     end
   end
 
+  route '/users/search', 'Search Users' do
+    # get current user
+    post 'Search for User' do
+      context 'when users found' do
+        let(:params) {{ email: 'user' }}
+        example 'retrieve current user' do
+          do_request({ data: params })
+
+          expect(status).to eq(200)
+          expect(json).to be_an_instance_of(Array)
+          expect(json.length).to eq(1)
+        end
+      end
+    end
+  end
+
   route '/users', 'Users Collection' do
     post 'Register Account' do
       authentication :basic, nil
