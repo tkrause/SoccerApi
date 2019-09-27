@@ -10,6 +10,11 @@ class UsersController < ApplicationController
     render json: user, status: :created
   end
 
+  def invite
+    user = User.create! user_invite_params
+    render json: user, status: :created
+  end
+
   def search
     query = User.select '*'
 
@@ -28,6 +33,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.permit :name, :email, :password, :password_confirmation
+  end
+
+  def user_invite_params
+    params.permit(:name, :email).merge(password: "Welcome#{Date.current.year}")
   end
 
   def set_user

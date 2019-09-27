@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resource :users, only: :create
   get 'users/current', to: 'users#current_user'
   post 'users/search', to: 'users#search'
+  post 'users/invite', to: 'users#invite'
 
   # teams
   get 'teams/all', to: 'teams#all'
