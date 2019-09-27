@@ -54,7 +54,7 @@ class EventsController < ApplicationController
         'start_at <= ?', DateTime.now
     ).where(event_type: 'game').order('start_at DESC').first
 
-    render json: @recent
+    render json: @recent, include: [:away_team, :home_team]
   end
 
   def next_event
@@ -63,7 +63,7 @@ class EventsController < ApplicationController
         'start_at > ?', DateTime.now
     ).first
 
-    render json: @next
+    render json: @next, include: [:away_team, :home_team]
   end
 
   private
