@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   # events / games
   resources :events
   get 'teams/:team_id/events', to: 'events#for_team'
+  get '/teams/:team_id/events/recent', to: 'events#recent_game'
+  get '/teams/:team_id/events/next', to: 'events#next_event'
 end

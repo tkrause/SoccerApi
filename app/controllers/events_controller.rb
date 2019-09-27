@@ -48,6 +48,24 @@ class EventsController < ApplicationController
     end
   end
 
+  def recent_game
+    @team = Team.find(params[:team_id])
+    @recent = @team.events.unscoped.where(
+        'start_at <= ?', DateTime.now
+    ).where(event_type: 'game').order('start_at DESC').first
+
+    render json: @recent
+  end
+
+  def next_event
+    @team = Team.find(params[:team_id])
+    @next = @team.events.where(
+        'start_at > ?', DateTime.now
+    ).first
+
+    render json: @next
+  end
+
   private
 
   def admin_or_fail
