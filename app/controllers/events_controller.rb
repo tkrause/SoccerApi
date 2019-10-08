@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
   # protect update and delete from modifications
   # by non admins
-  before_action :set_event_type, only: [:create]
   before_action :set_event, only: [:show, :update, :destroy]
+  before_action :set_event_type, only: [:create, :update]
   before_action :set_teams_create, only: [:create]
   before_action :set_teams, only: [:update, :destroy]
   before_action :admin_or_fail, only: [:create, :update, :destroy]
@@ -84,7 +84,11 @@ class EventsController < ApplicationController
   end
 
   def set_event_type
-    @is_game = (params.has_key?(:event_type) and params[:event_type] == 'game')
+    if @event.present?
+      @is_game = @event.event_type == 'game'
+    else
+      @is_game = (params.has_key?(:event_type) and params[:event_type] == 'game')
+    end
   end
 
   def set_event
