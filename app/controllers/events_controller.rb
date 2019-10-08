@@ -50,7 +50,7 @@ class EventsController < ApplicationController
 
   def recent_game
     @team = Team.find(params[:team_id])
-    @recent = @team.events.unscoped.where(
+    @recent = @team.events.unscope(:order).where(
         'start_at <= ?', DateTime.now
     ).where(event_type: 'game').order('start_at DESC').first
 
