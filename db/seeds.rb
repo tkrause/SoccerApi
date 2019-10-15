@@ -5,13 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-user = User.create!(name: 'Test User', email: 'user@example.com', password: '0987654321')
-player1 = User.create!(name: 'Player 1', email: 'player@example.com', password: '0987654321')
+user = User.create!(name: 'Robert Johnson', email: 'user@example.com', password: '0987654321')
+player1 = User.create!(name: 'John Smith', email: 'player@example.com', password: '0987654321')
+eric = User.create!(name: 'Eric Ybarra', email: 'eric@example.com', password: 'pass')
+william = User.create!(name: 'William Barajas', email: 'will@example.com', password: 'pass')
 
 # teams seeders
-team1 = Team.create!(name: 'Team Win', team_number: 506)
-team2 = Team.create!(name: 'Team Noobs', team_number: 611)
-ded_team = Team.create!(name: 'Dummy Team No One Is In', team_number: 666)
+team1 = Team.create!(name: 'Guardians', team_number: 506)
+team2 = Team.create!(name: 'Ice Breakers', team_number: 611)
+ded_team = Team.create!(name: 'Red Devils', team_number: 666)
 TeamMember.create!(user: user, team: team1, role: 'admin')
 TeamMember.create!(user: player1, team: team1, role: 'player')
 TeamMember.create!(user: user, team: team2, role: 'player')
@@ -34,14 +36,14 @@ Event.create!(
 
 Event.create!(
     event_type: 'game', start_at: 2.days.ago,
-    location_name: 'Ocean Side Middle School', location_address: '12345 School, Monterrey',
+    location_name: 'Menifee Valey High School', location_address: '3241 Valley High, Menifee',
     location_detail: 'Field 1',
     home_team_id: team1.id, away_team_id: team2.id
 )
 
 Event.create!(
     event_type: 'game', start_at: 12.days.from_now,
-    location_name: 'Ocean Side Middle School', location_address: '12345 School, Monterrey',
+    location_name: 'Lyle Marsh Park', location_address: '27050 Menifee Grove, Menifee',
     location_detail: 'Field 2',
     home_team_id: team2.id, away_team_id: team1.id
 )
